@@ -75,9 +75,9 @@ export default function Home() {
                       {[
                         { title: "Skill Gap Analysis", icon: Search, href: "/resume-analyzer" },
                         { title: "AI Interviewer", icon: MessageSquare, href: "/interviewprep" },
-                        { title: "AI Self Introduction", icon: Star, href: "#" },
+                        { title: "AI Self Introduction", icon: Star, href: "/self-introduction" },
                         { title: "Motivate.Me", icon: Briefcase, href: "#" },
-                        { title: "LinkedIn Roast", icon: Linkedin, href: "#" },
+                        { title: "LinkedIn Roast", icon: Linkedin, href: "/linkedin-roast" },
                         { title: "GitHub Roast", icon: Github, href: "#" },
                         { title: "Code Companion", icon: Terminal, href: "#" },
                         { title: "Dev Connect", icon: Users, href: "#" },
