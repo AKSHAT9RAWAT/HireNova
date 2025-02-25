@@ -73,21 +73,21 @@ export default function Home() {
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {[
-                        { title: "Skill Gap Analysis", icon: Search },
-                        { title: "AI Interviewer", icon: MessageSquare },
-                        { title: "AI Self Introduction", icon: Star },
-                        { title: "Motivate.Me", icon: Briefcase },
-                        { title: "LinkedIn Roast", icon: Linkedin },
-                        { title: "GitHub Roast", icon: Github },
-                        { title: "Code Companion", icon: Terminal },
-                        { title: "Dev Connect", icon: Users },
+                        { title: "Skill Gap Analysis", icon: Search, href: "/resume-analyzer" },
+                        { title: "AI Interviewer", icon: MessageSquare, href: "/interviewprep" },
+                        { title: "AI Self Introduction", icon: Star, href: "#" },
+                        { title: "Motivate.Me", icon: Briefcase, href: "#" },
+                        { title: "LinkedIn Roast", icon: Linkedin, href: "#" },
+                        { title: "GitHub Roast", icon: Github, href: "#" },
+                        { title: "Code Companion", icon: Terminal, href: "#" },
+                        { title: "Dev Connect", icon: Users, href: "#" },
                       ].map((tool) => (
                         <li key={tool.title}>
                           <NavigationMenuLink asChild>
-                            <a className="flex select-none items-center space-x-2 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                            <Link href={tool.href} className="flex select-none items-center space-x-2 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                               <tool.icon className="h-4 w-4" />
                               <span>{tool.title}</span>
-                            </a>
+                            </Link>
                           </NavigationMenuLink>
                         </li>
                       ))}
@@ -164,31 +164,37 @@ export default function Home() {
                 icon: Search,
                 title: "Skill Gap Analysis",
                 description: "Analyze your skills against job requirements and get personalized recommendations.",
+                href: "/resume-analyzer"
               },
               {
                 icon: MessageSquare,
                 title: "AI Interviewer",
                 description: "Practice interviews with our AI and get instant feedback on your responses.",
+                href: "/interviewprep"
               },
               {
                 icon: Star,
                 title: "AI Self Introduction",
                 description: "Create compelling self-introductions tailored to your target role.",
+                href: "#"
               },
               {
                 icon: Briefcase,
                 title: "Motivate.Me",
                 description: "Get personalized motivation and career guidance when you need it most.",
+                href: "#"
               },
               {
                 icon: Linkedin,
                 title: "LinkedIn Roast",
                 description: "Get honest feedback on your LinkedIn profile and suggestions for improvement.",
+                href: "#"
               },
               {
                 icon: Github,
                 title: "GitHub Roast",
                 description: "Receive constructive criticism on your GitHub profile and projects.",
+                href: "#"
               },
             ].map((tool) => (
               <Card key={tool.title} className="group relative overflow-hidden p-6 transition-all hover:shadow-lg">
@@ -367,4 +373,3 @@ export default function Home() {
     </div>
   )
 }
-
