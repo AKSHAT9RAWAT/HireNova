@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 267 37% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 267 37% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 267 37% 15%;
+    --primary: 267 84% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 267 47% 92%;
+    --secondary-foreground: 267 84% 45%;
+    --muted: 267 47% 92%;
+    --muted-foreground: 267 37% 45%;
+    --accent: 267 47% 92%;
+    --accent-foreground: 267 84% 45%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 267 47% 92%;
+    --input: 267 47% 92%;
+    --ring: 267 84% 45%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 267 37% 15%;
+    --foreground: 0 0% 98%;
+    --card: 267 37% 15%;
+    --card-foreground: 0 0% 98%;
+    --popover: 267 37% 15%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 267 84% 45%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 267 47% 92%;
+    --secondary-foreground: 267 84% 45%;
+    --muted: 267 47% 92%;
+    --muted-foreground: 267 37% 45%;
+    --accent: 267 47% 92%;
+    --accent-foreground: 267 84% 45%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 267 47% 92%;
+    --input: 267 47% 92%;
+    --ring: 267 84% 45%;
+  }
+}
+
+@layer components {
+  .text-gradient-glow {
+    @apply dark:animate-glow dark:bg-gradient-to-r dark:from-purple-400 dark:to-purple-100 dark:bg-clip-text dark:text-transparent;
+  }
+}
+
+@layer utilities {
+  .animate-wave {
+    animation: wave 15s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  }
+
+  .animate-wave-slow {
+    animation: wave 20s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .particles-container {
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 1%);
+    background-size: 3rem 3rem;
+    background-position: 0 0, 1.5rem 1.5rem;
+    animation: particles 20s linear infinite;
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: translate3d(-1%, -1%, 0) scale(1.5);
+  }
+  33% {
+    transform: translate3d(1%, -2%, 0) scale(1.6);
+  }
+  66% {
+    transform: translate3d(-2%, -1%, 0) scale(1.7);
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px rgba(167, 139, 250, 0.3), 0 0 40px rgba(167, 139, 250, 0.2);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(167, 139, 250, 0.5), 0 0 50px rgba(167, 139, 250, 0.3);
+  }
+}
+
+@keyframes particles {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100rem 100rem;
+  }
+}
+
