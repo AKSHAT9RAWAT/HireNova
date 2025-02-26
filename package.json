@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.22.0",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.4",
@@ -54,6 +55,7 @@
     "react-hook-form": "^7.54.1",
     "react-particles": "^2.12.2",
     "react-resizable-panels": "^2.1.7",
+    "react-tsparticles": "^2.12.2",
     "react-type-animation": "^3.2.0",
     "recharts": "2.15.0",
     "sonner": "^1.7.1",

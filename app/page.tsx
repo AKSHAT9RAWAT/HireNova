@@ -76,9 +76,9 @@ export default function Home() {
                         { title: "Skill Gap Analysis", icon: Search, href: "/resume-analyzer" },
                         { title: "AI Interviewer", icon: MessageSquare, href: "/interviewprep" },
                         { title: "AI Self Introduction", icon: Star, href: "/self-introduction" },
-                        { title: "Motivate.Me", icon: Briefcase, href: "#" },
+                        { title: "PortfolioPro", icon: Briefcase, href: "/portfolio" },
                         { title: "LinkedIn Roast", icon: Linkedin, href: "/linkedin-roast" },
-                        { title: "GitHub Roast", icon: Github, href: "#" },
+                        { title: "GitHub Roast", icon: Github, href: "/jobsearchclient" },
                         { title: "Code Companion", icon: Terminal, href: "#" },
                         { title: "Dev Connect", icon: Users, href: "#" },
                       ].map((tool) => (
@@ -180,9 +180,9 @@ export default function Home() {
               },
               {
                 icon: Briefcase,
-                title: "Motivate.Me",
+                title: "PortfolioPro",
                 description: "Get personalized motivation and career guidance when you need it most.",
-                href: "#"
+                href: "/jobsearchclient"
               },
               {
                 icon: Linkedin,

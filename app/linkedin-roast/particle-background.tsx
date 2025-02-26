@@ -1,36 +1,30 @@
 "use client"
 
-import { useCallback } from "react"
-import Particles from "react-particles"
-import type { Container, Engine } from "tsparticles-engine"
+import React from "react"
+import Particles from "react-tsparticles"
 import { loadFull } from "tsparticles"
 
 export default function ParticleBackground() {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine)
-  }, [])
-
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    await console.log(container)
-  }, [])
+  const particlesInit = async (main: any) => {
+    console.log("Particles initialized")
+    await loadFull(main) // Load the full tsparticles package
+  }
 
   return (
     <Particles
-      className="absolute inset-0"
       id="tsparticles"
       init={particlesInit}
-      loaded={particlesLoaded}
       options={{
         background: {
           color: {
-            value: "transparent",
+            value: "#000000",
           },
         },
-        fpsLimit: 120,
+        fpsLimit: 60,
         interactivity: {
           events: {
             onClick: {
-              enable: false,
+              enable: true,
               mode: "push",
             },
             onHover: {
@@ -51,13 +45,13 @@ export default function ParticleBackground() {
         },
         particles: {
           color: {
-            value: "#A855F7",
+            value: "#ffffff",
           },
           links: {
-            color: "#4ADE80",
+            color: "#ffffff",
             distance: 150,
             enable: true,
-            opacity: 0.2,
+            opacity: 0.5,
             width: 1,
           },
           collisions: {
@@ -70,7 +64,7 @@ export default function ParticleBackground() {
               default: "bounce",
             },
             random: false,
-            speed: 1,
+            speed: 2,
             straight: false,
           },
           number: {
@@ -81,7 +75,7 @@ export default function ParticleBackground() {
             value: 80,
           },
           opacity: {
-            value: 0.2,
+            value: 0.5,
           },
           shape: {
             type: "circle",
@@ -92,7 +86,14 @@ export default function ParticleBackground() {
         },
         detectRetina: true,
       }}
+      style={{
+        position: "absolute",
+        zIndex: -1,
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+      }}
     />
   )
 }
-
