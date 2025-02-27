@@ -79,7 +79,7 @@ export default function Home() {
                         { title: "PortfolioPro", icon: Briefcase, href: "/portfolio" },
                         { title: "LinkedIn Roast", icon: Linkedin, href: "/linkedin-roast" },
                         { title: "GitHub Roast", icon: Github, href: "/jobsearchclient" },
-                        { title: "Code Companion", icon: Terminal, href: "#" },
+                        { title: "Code Companion", icon: Terminal, href: "/githubchat" },
                         { title: "Dev Connect", icon: Users, href: "#" },
                       ].map((tool) => (
                         <li key={tool.title}>

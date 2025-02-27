@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // app/resume-analyzer/page.tsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -12,8 +12,10 @@ import {
   BarChart2,
   Award,
   TrendingUp,
-  AlertCircle
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const BackgroundGradient = () => (
   <div className="absolute inset-0 -z-10 h-full w-full bg-black">
@@ -50,6 +52,60 @@ const SkillBar = ({ skill, score }) => (
 
 const ResumeAnalyzerPage = () => {
   const [isDragging, setIsDragging] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [analysisResult, setAnalysisResult] = useState<string | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const handleFileUpload = async (uploadedFile: File) => {
+    setFile(uploadedFile);
+    setIsAnalyzing(true);
+    try {
+      const genAI = new GoogleGenerativeAI("AIzaSyA-tAJWZDUcDpMEo8IfT3wEI9D39KMKVV8");
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+      const fileBuffer = await uploadedFile.arrayBuffer();
+      const base64Data = Buffer.from(fileBuffer).toString("base64");
+
+      const result = await model.generateContent([
+        {
+          inlineData: {
+            data: base64Data,
+            mimeType: uploadedFile.type || "application/pdf",
+          },
+        },
+        "Analyze this resume and provide a detailed summary with suggestions for improvement. Include feedback on keyword optimization, experience impact, skills relevance, and ATS compatibility.",
+      ]);
+
+      // Clean up the response (remove ** and ###)
+      const cleanedResult = result.response.text()
+        .replace(/\*\*/g, '')
+        .replace(/###/g, '')
+        .replace(/\n/g, '<br/>'); // Convert newlines to HTML breaks for rendering
+
+      setAnalysisResult(cleanedResult);
+    } catch (error) {
+      console.error("Error analyzing resume:", error);
+      setAnalysisResult("Failed to analyze the resume. Please try again.");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  const onFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile && (droppedFile.type === "application/pdf" || droppedFile.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+      handleFileUpload(droppedFile);
+    }
+  };
+
+  const onFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      handleFileUpload(selectedFile);
+    }
+  };
 
   return (
     <div className="min-h-screen w-full bg-black text-white overflow-hidden">
@@ -93,11 +149,11 @@ const ResumeAnalyzerPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
                 <div>
                   <div
-                    className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors duration-300 ${isDragging ? 'border-purple-500 bg-purple-500/10' : 'border-purple-500/20 hover:border-purple-500/50'
-                      }`}
+                    className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors duration-300 ${isDragging ? 'border-purple-500 bg-purple-500/10' : 'border-purple-500/20 hover:border-purple-500/50'}`}
                     onDragEnter={() => setIsDragging(true)}
                     onDragLeave={() => setIsDragging(false)}
-                    onDrop={() => setIsDragging(false)}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={onFileDrop}
                   >
                     <Upload className="w-12 h-12 text-purple-400 mx-auto mb-4" />
                     <h3 className="text-xl font-medium text-purple-300 mb-2">
@@ -106,10 +162,11 @@ const ResumeAnalyzerPage = () => {
                     <p className="text-gray-400 mb-4">
                       Drop your PDF or DOCX file here, or click to browse
                     </p>
-                    <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 transition-colors duration-300">
+                    <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 transition-colors duration-300 cursor-pointer">
                       <span>Select File</span>
                       <ChevronRight className="w-4 h-4" />
-                    </button>
+                      <input type="file" className="hidden" accept=".pdf,.docx" onChange={onFileSelect} />
+                    </label>
                   </div>
                 </div>
 
@@ -130,92 +187,48 @@ const ResumeAnalyzerPage = () => {
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {[
-            {
-              icon: BarChart2,
-              title: "Deep Analysis",
-              description: "Get comprehensive insights into your resume's strengths and areas for improvement",
-              delay: 0.4,
-            },
-            {
-              icon: Target,
-              title: "ATS Optimization",
-              description: "Ensure your resume passes Applicant Tracking Systems with formatting suggestions",
-              delay: 0.5,
-            },
-            {
-              icon: TrendingUp,
-              title: "Industry Alignment",
-              description: "Compare your resume against industry standards and top performers",
-              delay: 0.6,
-            },
+            { icon: BarChart2, title: "Deep Analysis", description: "Get comprehensive insights into your resume's strengths and areas for improvement", delay: 0.4 },
+            { icon: Target, title: "ATS Optimization", description: "Ensure your resume passes Applicant Tracking Systems with formatting suggestions", delay: 0.5 },
+            { icon: TrendingUp, title: "Industry Alignment", description: "Compare your resume against industry standards and top performers", delay: 0.6 },
           ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: feature.delay }}
-            >
+            <motion.div key={index} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: feature.delay }}>
               <GlowCard className="h-full">
                 <feature.icon className="w-8 h-8 text-purple-400 mb-4" />
-                <h3 className="text-xl font-semibold mb-3 text-purple-300">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-400">
-                  {feature.description}
-                </p>
+                <h3 className="text-xl font-semibold mb-3 text-purple-300">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
               </GlowCard>
             </motion.div>
           ))}
         </div>
 
-        {/* Enhancement Suggestions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="max-w-4xl mx-auto mt-16"
-        >
-          <GlowCard>
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-purple-300 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5" />
-                Smart Suggestions
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  {
-                    icon: Award,
-                    title: "Achievement Focus",
-                    description: "Add more quantifiable achievements to strengthen impact"
-                  },
-                  {
-                    icon: Zap,
-                    title: "Action Words",
-                    description: "Use more powerful action verbs to describe experiences"
-                  },
-                  {
-                    icon: CheckCircle,
-                    title: "Skills Match",
-                    description: "Align technical skills with job market demands"
-                  },
-                  {
-                    icon: Target,
-                    title: "Target Match",
-                    description: "Customize content for your target industry"
-                  }
-                ].map((suggestion, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-purple-500/5 border border-purple-500/10">
-                    <suggestion.icon className="w-5 h-5 text-purple-400 mt-1" />
-                    <div>
-                      <h4 className="font-medium text-purple-300 mb-1">{suggestion.title}</h4>
-                      <p className="text-sm text-gray-400">{suggestion.description}</p>
-                    </div>
+        {/* Analysis Results Section */}
+        {isAnalyzing || analysisResult ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="max-w-4xl mx-auto mt-16"
+          >
+            <GlowCard>
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-purple-300 flex items-center gap-2">
+                  <BarChart2 className="w-5 h-5" />
+                  Analysis Results
+                </h3>
+                {isAnalyzing ? (
+                  <div className="flex items-center justify-center py-8">
+                    <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
+                    <span className="ml-2 text-gray-400">Analyzing your resume...</span>
                   </div>
-                ))}
+                ) : (
+                  <div className="prose prose-invert max-w-none">
+                    <div dangerouslySetInnerHTML={{ __html: analysisResult || '' }} className="text-gray-300" />
+                  </div>
+                )}
               </div>
-            </div>
-          </GlowCard>
-        </motion.div>
+            </GlowCard>
+          </motion.div>
+        ) : null}
       </div>
     </div>
   );
