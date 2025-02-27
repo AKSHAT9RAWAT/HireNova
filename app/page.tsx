@@ -80,7 +80,17 @@ export default function Home() {
                         { title: "LinkedIn Roast", icon: Linkedin, href: "/linkedin-roast" },
                         { title: "GitHub Roast", icon: Github, href: "/jobsearchclient" },
                         { title: "Code Companion", icon: Terminal, href: "/githubchat" },
-                        { title: "Dev Connect", icon: Users, href: "#" },
+                        { title: "Dev Connect", icon: Users, href: "/aicoder" },
+                        { title: "Master outreach", icon: Users, href: "/emailwriter" },
+                        { title: "Chatbot", icon: Users, href: "/chatbot" },
+                        { title: "Career Goal setter", icon: Users, href: "/careergoal" },
+                        { title: "Job description decoder", icon: Users, href: "/jobdecoder" },
+                        { title: "Job Comparision", icon: Users, href: "/jobcompare" },
+                        { title: "Roadmap-Generator", icon: Users, href: "/roadmap" },
+                        { title: "Ai-Powered-Prepareation", icon: Users, href: "/preparationai" },
+
+
+
                       ].map((tool) => (
                         <li key={tool.title}>
                           <NavigationMenuLink asChild>
