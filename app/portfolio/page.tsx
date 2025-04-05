@@ -11,67 +11,69 @@ import Image from "next/image"
 
 export default function DynamicPortfolio() {
   const [portfolioData, setPortfolioData] = useState({
-    name: "Mukesh A",
-    title: "Prefinal-year Student in Artificial Intelligence and Data Science",
-    about: "Hello! I'm Mukesh A, a prefinal-year student at Panimalar Engineering College, pursuing a degree in Artificial Intelligence and Data Science. My passion for technology and innovation drives me to constantly explore new areas in AI and data science.",
+    name: "Alex Johnson",
+    title: "Full Stack Developer & AI Enthusiast",
+    about: "I'm a passionate full-stack developer with a strong interest in artificial intelligence and machine learning. With 3 years of experience in web development, I specialize in creating modern, scalable applications using React, Node.js, and Python. I'm constantly exploring new technologies and frameworks to stay at the forefront of web development.",
     skills: [
-      { name: "Python", level: 90 },
-      { name: "SQL", level: 80 },
-      { name: "HTML", level: 70 },
-      { name: "CSS", level: 70 }
+      { name: "JavaScript", level: 95 },
+      { name: "React", level: 90 },
+      { name: "Node.js", level: 85 },
+      { name: "Python", level: 80 },
+      { name: "TypeScript", level: 85 },
+      { name: "AWS", level: 75 }
     ],
     projects: [
       {
-        title: "Edu-Verse",
-        description: "An innovative educational platform designed to simplify learning and enhance the educational experience.",
+        title: "AI-Powered Task Manager",
+        description: "A smart task management system that uses machine learning to predict task completion times and optimize schedules.",
         image: "/placeholder.svg?height=400&width=600",
-        tags: ["Education", "AI"],
-        github: "#",
-        demo: "#"
+        tags: ["AI", "React", "Node.js"],
+        github: "https://github.com/example/task-manager",
+        demo: "https://task-manager-demo.com"
       },
       {
-        title: "ArtFusion",
-        description: "An innovative platform for art enthusiasts, collectors, and creators.",
+        title: "EcoTrack",
+        description: "A sustainability tracking app that helps users monitor and reduce their carbon footprint through AI-powered insights.",
         image: "/placeholder.svg?height=400&width=600",
-        tags: ["Art", "Platform"],
-        github: "#",
-        demo: "#"
+        tags: ["Sustainability", "React Native", "Firebase"],
+        github: "https://github.com/example/ecotrack",
+        demo: "https://ecotrack-app.com"
       },
       {
-        title: "EDUTECHMASTER",
-        description: "An educational platform designed to revolutionize the learning experience through innovative technologies.",
+        title: "CodeCollab",
+        description: "A real-time collaborative coding platform with built-in AI code suggestions and pair programming features.",
         image: "/placeholder.svg?height=400&width=600",
-        tags: ["Education", "Tech"],
-        github: "#",
-        demo: "#"
+        tags: ["Web Development", "WebSockets", "AI"],
+        github: "https://github.com/example/codecollab",
+        demo: "https://codecollab.io"
       },
       {
-        title: "LegalMediverse",
-        description: "A platform integrating legal, medical, and educational services.",
+        title: "HealthAI",
+        description: "A health monitoring system that uses machine learning to analyze user health data and provide personalized recommendations.",
         image: "/placeholder.svg?height=400&width=600",
-        tags: ["Legal", "Medical", "Education"],
-        github: "#",
-        demo: "#"
+        tags: ["Healthcare", "Machine Learning", "React"],
+        github: "https://github.com/example/healthai",
+        demo: "https://healthai.app"
       }
     ],
     certifications: [
-      { title: "Data Analytics" },
-      { title: "Machine learning with Scikit-learn" },
-      { title: "Python Basics" },
-      { title: "SQL" }
+      { title: "AWS Certified Developer" },
+      { title: "Google Cloud Professional" },
+      { title: "TensorFlow Developer" },
+      { title: "React Advanced Patterns" }
     ],
     achievements: [
-      { title: "AISC HACKS 2024", description: "Won First prize in AISCHacks 2024 Hackathon" },
-      { title: "Elixir 2024", description: "Won Second Prize in Project Presentation" },
-      { title: "DPBH 2024", description: "DARK PATTERN BUSTER HACKATHON (DPBH) 2023 Finalist IIT(BHU)" },
-      { title: "Eduhacks 2024", description: "Participated in Eduhacks 2024" }
+      { title: "Hackathon Winner 2023", description: "First place in the Global AI Hackathon for developing an innovative healthcare solution" },
+      { title: "Open Source Contributor", description: "Significant contributions to major open-source projects including React and Node.js" },
+      { title: "Tech Conference Speaker", description: "Regular speaker at international tech conferences on AI and web development" },
+      { title: "Mentorship Program", description: "Lead mentor for junior developers in the TechStars mentorship program" }
     ],
     social: {
-      email: "mukeshofficial685a@gmail.com",
-      phone: "+919944851168",
-      linkedin: "#",
-      github: "#",
-      twitter: ""
+      email: "alex.johnson@example.com",
+      phone: "+1 (555) 123-4567",
+      linkedin: "https://linkedin.com/in/alexjohnson",
+      github: "https://github.com/alexjohnson",
+      twitter: "https://twitter.com/alexjohnson"
     }
   })
 
